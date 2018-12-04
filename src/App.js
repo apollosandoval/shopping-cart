@@ -19,22 +19,35 @@ class App extends Component {
         { id: 46, name: 'Intelligent Leather Clock', priceInCents: 2999 },
         { id: 47, name: 'Ergonomic Bronze Lamp', priceInCents: 40000 },
         { id: 48, name: 'Awesome Leather Shoes', priceInCents: 3990 }
+      ],
+      items: [
+        { id: 1, product: { id: 40, name: 'Mediocre Iron Watch', priceInCents: 399 }, quantity: 1 },
+        { id: 2, product: { id: 41, name: 'Heavy Duty Concrete Plate', priceInCents: 499 }, quantity: 2 },
+        { id: 3, product: { id: 42, name: 'Intelligent Paper Knife', priceInCents: 1999 }, quantity: 1 }
       ]
     }
   }
 
+  addItem = (item) => {
+    let newItem = {
+      id: this.state.items.length+1,
+      product: (this.state.products.filter(element => element.id == item.productId))[0],
+      quantity: item.quantity,
+    }
+    console.log(newItem);
+    this.setState({
+      items: [...this.state.items, newItem]
+    })
+  }
+
   render() {
-    let cartItemsList = [
-      { id: 1, product: { id: 40, name: 'Mediocre Iron Watch', priceInCents: 399 }, quantity: 1 },
-      { id: 2, product: { id: 41, name: 'Heavy Duty Concrete Plate', priceInCents: 499 }, quantity: 2 },
-      { id: 3, product: { id: 42, name: 'Intelligent Paper Knife', priceInCents: 1999 }, quantity: 1 },
-    ];
 
     return (
       <div>
         <CartHeader />
-        <CartItems items={cartItemsList} />
-        <AddItem products={this.state.products} />
+        <CartItems items={this.state.items} />
+        {/* I don't understand how to handle this function. Don't we need this to be in the state? */}
+        <AddItem products={this.state.products} onItemAdded = { this.addItem }/>
         <CartFooter copyright={'2016'}/>
       </div>
     );
