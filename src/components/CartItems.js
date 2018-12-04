@@ -3,7 +3,7 @@ import CartItem from './CartItem';
 
 const CartItems = ({items}) => {
     const cartItems = items.map((item) => {
-        return <CartItem item={item} />
+        return <CartItem key={item.id} item={item} />
     });
 
     return (
