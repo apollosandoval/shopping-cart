@@ -28,25 +28,24 @@ class App extends Component {
     }
   }
 
-  addItem = (item) => {
+  addItem(item){
     let newItem = {
       id: this.state.items.length+1,
-      product: (this.state.products.filter(element => element.id == item.productId))[0],
+      product: (this.state.products.filter(element => element.id === item.productId))[0],
       quantity: item.quantity,
     }
-    console.log(newItem);
     this.setState({
       items: [...this.state.items, newItem]
     })
   }
 
   render() {
+    let total = this.state.items.reduce( (acc, item) => {return acc+item.product.priceInCents}, 0);
 
     return (
       <div>
         <CartHeader />
-        <CartItems items={this.state.items} />
-        {/* I don't understand how to handle this function. Don't we need this to be in the state? */}
+        <CartItems items={this.state.items} total={total}/>
         <AddItem products={this.state.products} onItemAdded = { this.addItem }/>
         <CartFooter copyright={'2016'}/>
       </div>

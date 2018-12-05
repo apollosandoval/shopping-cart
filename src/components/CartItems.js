@@ -1,7 +1,7 @@
 import React from 'react';
 import CartItem from './CartItem';
 
-const CartItems = ({items}) => {
+const CartItems = ({items, total}) => {
     const cartItems = items.map((item) => {
         return <CartItem key={item.id} item={item} />
     });
@@ -10,6 +10,12 @@ const CartItems = ({items}) => {
         <div className="container">
             <h1>Items</h1>
             <div className="list-group">
+                <div className="list-group-item">
+                    <div className="row">
+                        <div className="col-md-8">Total</div>
+                        <div className="col-md-2">${total/100}</div>
+                    </div>
+                </div>
                 <div className="list-group-item">
                     <div className="row">
                         <div className="col-md-8">Product</div>
