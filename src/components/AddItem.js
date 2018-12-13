@@ -7,7 +7,8 @@ class AddItem extends React.Component {
             quantity: 0,
             productId: 40
         };
-
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange = (event) => {
@@ -16,7 +17,10 @@ class AddItem extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.props.onItemAdded(this.state);
+        if (this.state.quantity != 0) {
+            this.props.onItemAdded(this.state);
+        }
+        // this.props.onItemAdded(this.state);
     }
 
     render() {

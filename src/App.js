@@ -26,12 +26,14 @@ class App extends Component {
         { id: 3, product: { id: 42, name: 'Intelligent Paper Knife', priceInCents: 1999 }, quantity: 1 }
       ]
     }
+
+    this.addItem = this.addItem.bind(this);
   }
 
   addItem(item){
     let newItem = {
       id: this.state.items.length+1,
-      product: (this.state.products.filter(element => element.id === item.productId))[0],
+      product: (this.state.products.filter(element => element.id === parseInt(item.productId)))[0],
       quantity: item.quantity,
     }
     this.setState({
@@ -40,7 +42,7 @@ class App extends Component {
   }
 
   render() {
-    let total = this.state.items.reduce( (acc, item) => {return acc+item.product.priceInCents}, 0);
+    let total = this.state.items.reduce( (acc, item) => {return acc+item.product.priceInCents*item.quantity}, 0);
 
     return (
       <div>
